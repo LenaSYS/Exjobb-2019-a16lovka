@@ -1,4 +1,5 @@
 var fs = require('fs');
+var seedrandom = require('seedrandom');
 
 var Colors = ["Red", "Blue", "Yellow",
     "Green", "Brown", "Grey",
@@ -94,7 +95,7 @@ class Item {
     }
 }
 
-class Object {
+class JsonObject {
     constructor() {
         this.jsonData = [];
     }
@@ -107,21 +108,21 @@ class Object {
 }
 
 function generateJSON() {
-    var jsonData = new Object();
+    var jsonData = new JsonObject();
+    seedrandom('1', { global: true });
 
     for (var i = 0; i < 10; i++) {
-        //Math.seedrandom(i);
         var item = new Item(i);
         jsonData.addItem(item.getItem());
     }
+
     var jsonData = jsonData.getObject();
     console.log(jsonData);
 
     fs.writeFile ('../data.json', JSON.stringify(jsonData), function(err) {
         if (err) throw err;
         console.log('complete');
-        }
-    );
+    });
 }
 
 generateJSON();
