@@ -1,6 +1,6 @@
-DROP DATABASE Test;
-CREATE DATABASE Test;
-USE Test;
+DROP DATABASE Products;
+CREATE DATABASE Products;
+USE Products;
 
 /* Table for datatype JSON with same data size as TINYBLOB */
 CREATE TABLE JOSN_Tiny(
