@@ -3,9 +3,9 @@ CREATE DATABASE Products;
 USE Products;
 
 /* Table for datatype JSON with same data size as TINYBLOB */
-CREATE TABLE JOSN_Tiny(
+CREATE TABLE JSON_Tiny(
 	Id INT AUTO_INCREMENT,
-    JOSN_Tiny_Data JSON,
+    JSON_Tiny_Data JSON,
     PRIMARY KEY (Id)
 )ENGINE=InnoDB;
 
