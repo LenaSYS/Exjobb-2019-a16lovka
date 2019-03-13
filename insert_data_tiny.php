@@ -1,17 +1,24 @@
 <?php
 
 $data = file_get_contents('../data_tiny.json');
+$data= json_decode($data);
 
 try {
-        $sql_tinyblob = "INSERT INTO BLOB_Tiny(BLOB_Tiny_Data) VALUES('$data')";
-        $sql_tinyjson = "INSERT INTO JSON_Tiny(JSON_Tiny_Data) VALUES('$data')";
 
-        $conn->exec($sql_tinyblob);
-        $conn->exec($sql_tinyjson);
-        echo "New record created successfully";
+    for ($i=0; $i < sizeof($data); $i++) { 
+
+        $dataToInsert = json_encode($data[$i]);
+
+        $sql = "INSERT INTO BLOB_Tiny(BLOB_Tiny_Data) VALUES('$dataToInsert');
+                INSERT INTO JSON_Tiny(JSON_Tiny_Data) VALUES('$dataToInsert')";
+
+        $conn->exec($sql);
     }
+    
+    echo "New records created successfully";
+}
 catch(PDOException $e){
-        echo $sql . "<br>" . $e->getMessage();
-    }
+    echo $sql . "<br>" . $e->getMessage();
+}
 
 ?>
