@@ -1,81 +1,59 @@
+//Node.js modules needed used in the script
 var fs = require('fs');
 var seedrandom = require('seedrandom');
+var arrays  = require('arrays');
 
-var Colors = ["Red", "Blue", "Yellow",
-    "Green", "Brown", "Grey",
-    "Black", "White", "Beige",
-    "Pink", "Purple", "Orange"];
-
-var Genders = ["Female", "Male"];
-
-var Categorites = ["Shoes", "Clothes", "Accessories",
-    "Bags", "Underwear", "Tops",
-    "Jeans", "Trousers", "Dresses",
-    "Sweaters", "Jewelry", "Hats",
-    "Gloves", "Coats", "Jackets",
-    "Skirts", "Shorts", "Shirts",
-    "Blouses", "Belts", "Sportswear"];
-
-var Sizes = ["XXS", "XS", "S",
-    "M", "L", "XL",
-    "XXL", 35, 36,
-    37, 38, 39,
-    40, 41, 42,
-    43, 44, 45];
-
-var Currencies = ["SEK", "DKK", "NOK",
-    "EUR", "GBP", "USD"];
-
-var Countries = ["Sweden", "Norway", "Denmark",
-    "United Kingdom", "Finland", "Germany",
-    "USA", "France", "Spain"];
-
-//var Titles = [];
-//var Dates = [];
-//var Descriptions = [];
-//var Brands = [];
-
+//Returns a random date between two specified dates
 function getRandomDate() {
     var fromDate = new Date('01-01-2000'); 
-    var toDate = new Date('01-01-2019')
+    var toDate = new Date('01-01-2019');
     fromDate = fromDate.getTime();
     toDate = toDate.getTime();
-    return new Date(fromDate + Math.random() * (toDate - fromDate));
+    var date = new Date(fromDate + Math.random() * (toDate - fromDate))
+    return date;
 }
 
+//Genereates random ineger between max and min values
+//The maximum and minimum is both inclusive
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
 }
 
+//Returns a random length description
+function getSlicedDescription() {
+    var str = arrays.Description; 
+    var length = str.length;
+    var randomLength = getRandomInt(200, length);
+    var result = str.slice(0, randomLength);
+    return result;
+}
+
+//Class for an Object
 class Item {
     constructor(Id) {
         this.id = Id + 1;
-        this.product_Id = "";
-        this.title = "";
         this.price = getRandomInt(50, 1000);
-        this.description = "";
-        this.brand = "";
-        this.gender = Genders[getRandomInt(0, (Genders.length - 1))];
-        this.color = Colors[getRandomInt(0, (Colors.length - 1))];
-        this.parent_category = Categorites[getRandomInt(0, (Categorites.length - 1))];
-        this.child_category = Categorites[getRandomInt(0, (Categorites.length - 1))];
-        this.size = Sizes[getRandomInt(0, (Sizes.length - 1))];
+        this.description = getSlicedDescription();
+        this.gender = arrays.Genders[getRandomInt(0, (arrays.Genders.length - 1))];
+        this.color = arrays.Colors[getRandomInt(0, (arrays.Colors.length - 1))];
+        this.parent_category = arrays.Categorites[getRandomInt(0, (arrays.Categorites.length - 1))];
+        this.child_category = arrays.Categorites[getRandomInt(0, (arrays.Categorites.length - 1))];
+        this.size = arrays.Sizes[getRandomInt(0, (arrays.Sizes.length - 1))];
         this.created_date = getRandomDate();
         this.modified_date = getRandomDate();
         this.active_date = getRandomDate();
-        this.currency = Currencies[getRandomInt(0, (Currencies.length - 1))];
-        this.country = Countries[getRandomInt(0, (Countries.length - 1))];
+        this.currency = arrays.Currencies[getRandomInt(0, (arrays.Currencies.length - 1))];
+        this.country = arrays.Countries[getRandomInt(0, (arrays.Countries.length - 1))];
+        this.title = this.color + " " + this.child_category;
     }
     getItem() {
         var item = {
             "id": this.id,
-            "product_id": this.product_id,
             "title": this.title,
             "price": this.price,
             "description": this.description,
-            "brand": this.brand,
             "gender": this.gender,
             "color": this.color,
             "categories": [
@@ -95,6 +73,7 @@ class Item {
     }
 }
 
+//Class for an large array of several smaller Objects
 class JsonObject {
     constructor() {
         this.jsonData = [];
@@ -107,17 +86,17 @@ class JsonObject {
     }
 }
 
+//Generates JOSN-object and saves it to a file
 function generateJSON() {
     var jsonData = new JsonObject();
     seedrandom('1', { global: true });
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 100; i++) {
         var item = new Item(i);
         jsonData.addItem(item.getItem());
     }
 
     var jsonData = jsonData.getObject();
-    console.log(jsonData);
 
     fs.writeFile ('../data.json', JSON.stringify(jsonData), function(err) {
         if (err) throw err;
