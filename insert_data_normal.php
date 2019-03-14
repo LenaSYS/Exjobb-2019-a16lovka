@@ -1,6 +1,6 @@
 <?php
 
-$data = file_get_contents('../data.json');
+$data = file_get_contents('../data_normal.json');
 $data= json_decode($data);
 
 try {
