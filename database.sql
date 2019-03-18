@@ -58,3 +58,31 @@ CREATE TABLE BLOB_Long(
     PRIMARY KEY (Id)
 )ENGINE=InnoDB;
 
+/* Table for datatype TINYTEXT */
+CREATE TABLE TEXT_Tiny(
+	Id INT AUTO_INCREMENT,
+    TEXT_Tiny_Data TINYTEXT,
+    PRIMARY KEY (Id)
+)ENGINE=InnoDB;
+
+/* Table for datatype TEXT */
+CREATE TABLE TEXT_Normal(
+	Id INT AUTO_INCREMENT,
+    TEXT_Normal_Data TEXT,
+    PRIMARY KEY (Id)
+)ENGINE=InnoDB;
+
+/* Table for datatype MEDIUMTEXT */
+CREATE TABLE TEXT_Medium(
+	Id INT AUTO_INCREMENT,
+    TEXT_Medium_Data MEDIUMTEXT,
+    PRIMARY KEY (Id)
+)ENGINE=InnoDB;
+
+/* Table for datatype LONGTEXT */
+CREATE TABLE TEXT_Long(
+	Id INT AUTO_INCREMENT,
+    TEXT_Long_Data LONGTEXT,
+    PRIMARY KEY (Id)
+)ENGINE=InnoDB;
+
