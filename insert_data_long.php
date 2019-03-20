@@ -13,7 +13,8 @@ try {
         $dataToInsert = json_encode($data[$i]);
 
         $sql = "INSERT INTO BLOB_Long(BLOB_Long_Data) VALUES('$dataToInsert');
-                INSERT INTO JSON_Long(JSON_Long_Data) VALUES('$dataToInsert')";
+                INSERT INTO JSON_Long(JSON_Long_Data) VALUES('$dataToInsert');
+                INSERT INTO TEXT_Long(TEXT_Long_Data) VALUES('$dataToInsert')";
 
         $conn->exec($sql);
     }

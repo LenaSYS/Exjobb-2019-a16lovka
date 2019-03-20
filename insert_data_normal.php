@@ -1,5 +1,8 @@
 <?php
 
+ini_set('memory_limit', '5000M');
+ini_set('max_execution_time', 240);
+
 $data = file_get_contents('../data_normal.json');
 $data= json_decode($data);
 
@@ -10,7 +13,8 @@ try {
         $dataToInsert = json_encode($data[$i]);
 
         $sql = "INSERT INTO BLOB_Normal(BLOB_Normal_Data) VALUES('$dataToInsert');
-                INSERT INTO JSON_Normal(JSON_Normal_Data) VALUES('$dataToInsert')";
+                INSERT INTO JSON_Normal(JSON_Normal_Data) VALUES('$dataToInsert');
+                INSERT INTO TEXT_Normal(TEXT_Normal_Data) VALUES('$dataToInsert')";
 
         $conn->exec($sql);
     }
