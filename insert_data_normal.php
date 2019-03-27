@@ -8,16 +8,13 @@ $data= json_decode($data);
 
 try {
 
-    for ($i=0; $i < sizeof($data); $i++) { 
+    $dataToInsert = json_encode($data);
 
-        $dataToInsert = json_encode($data[$i]);
+    $sql = "INSERT INTO JSON_Normal(JSON_Normal_Data) VALUES('$dataToInsert');
+            INSERT INTO BLOB_Normal(BLOB_Normal_Data) VALUES('$dataToInsert'); 
+            INSERT INTO TEXT_Normal(TEXT_Normal_Data) VALUES('$dataToInsert');";
 
-        $sql = "INSERT INTO BLOB_Normal(BLOB_Normal_Data) VALUES('$dataToInsert');
-                INSERT INTO JSON_Normal(JSON_Normal_Data) VALUES('$dataToInsert');
-                INSERT INTO TEXT_Normal(TEXT_Normal_Data) VALUES('$dataToInsert')";
-
-        $conn->exec($sql);
-    }
+    $conn->exec($sql);
     
     echo "New records created successfully";
 }
