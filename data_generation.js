@@ -1,7 +1,7 @@
 //Node.js modules needed used in the script
 var fs = require('fs');
 var seedrandom = require('seedrandom');
-var arrays  = require('arrays');
+var arrays  = require('arrays/data_arrays');
 
 //Returns a random date between two specified dates
 function getRandomDate() {
@@ -16,6 +16,7 @@ function getRandomDate() {
 //Genereates random ineger between max and min values
 //The maximum and minimum is both inclusive
 function getRandomInt(min, max) {
+    seedrandom('1', { global: true });
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; 
@@ -33,7 +34,7 @@ function getSlicedDescription() {
 //Class for an Object
 class Item {
     constructor(Id) {
-        this.id = Id + 1;
+        this.id = Id;
         this.price = getRandomInt(50, 1000);
         this.description = getSlicedDescription();
         this.gender = arrays.Genders[getRandomInt(0, (arrays.Genders.length - 1))];
@@ -73,30 +74,14 @@ class Item {
     }
 }
 
-//Class for an large array of several smaller Objects
-class JsonObject {
-    constructor() {
-        this.jsonData = [];
-    }
-    addItem(item) {
-        this.jsonData.push(item);
-    }
-    getObject() {
-        return this.jsonData;
-    }
-}
-
 //Generates JOSN-object and saves it to a file
 function generateJSON() {
-    var jsonData = new JsonObject();
-    seedrandom('1', { global: true });
+    var jsonData = [];
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 10; i++) {
         var item = new Item(i);
-        jsonData.addItem(item.getItem());
+        jsonData.push(item.getItem());
     }
-
-    var jsonData = jsonData.getObject();
 
     fs.writeFile ('../data.json', JSON.stringify(jsonData), function(err) {
         if (err) throw err;
