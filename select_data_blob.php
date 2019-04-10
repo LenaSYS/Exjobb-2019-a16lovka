@@ -4,17 +4,19 @@
     ini_set('memory_limit', '5000M');
     ini_set('max_execution_time', 240);
 
-    $stmt = $conn->prepare("SELECT BLOB_Long_Data FROM BLOB_Long");
+    $stmt = $conn->prepare("SELECT BLOB_Tiny_Data FROM BLOB_Tiny");
 
     $time_start = microtime(true);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
-        
-    for ($i=0; $i < sizeof($data); $i++) {    
-        $item = json_decode($data[$i]);
-        if($item->{'price'} < 500) {
-            print_r($item->{'id'} . "\n");
-        }
+
+    $item = json_decode($data[0]);
+
+    for ($i=0; $i < sizeof($item); $i++) {   
+        $obj = $item[$i];
+        //if($obj->{'price'} < 500) {
+            print_r($obj->{'color'} . "\n");
+        //} 
     }
 
     $time_end = microtime(true);
@@ -26,14 +28,6 @@
     file_put_contents($file, $current); 
 ?>
 </pre>
-
-<script>
-    var counter = localStorage.getItem("count");
-    counter++;
-    localStorage.setItem("count", counter);
-    if(counter < 100) {
-        location.reload();
-    }
-</script>
+<script src="reload_count.js"></script>
 
 
