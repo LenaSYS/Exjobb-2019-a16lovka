@@ -4,7 +4,7 @@
     ini_set('memory_limit', '5000M');
     ini_set('max_execution_time', 240);
 
-    $stmt = $conn->prepare("SELECT BLOB_Tiny_Data FROM BLOB_Tiny");
+    $stmt = $conn->prepare("SELECT BLOB_Normal_Data FROM BLOB_Normal");
 
     $time_start = microtime(true);
     $stmt->execute();
@@ -14,9 +14,11 @@
 
     for ($i=0; $i < sizeof($item); $i++) {   
         $obj = $item[$i];
-        //if($obj->{'price'} < 500) {
-            print_r($obj->{'color'} . "\n");
-        //} 
+
+        /* Remove IF-statement and change id to color for Query 2 */
+        if($obj->{'price'} < 500) {
+            print_r($obj->{'id'} . "\n");
+        } 
     }
 
     $time_end = microtime(true);

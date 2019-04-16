@@ -15,6 +15,11 @@
 
     /* require('select_data_blob.php'); */
     /* require('select_data_text.php'); */
-    require('select_data_json.php');
+    /* require('select_data_json.php'); */
+    /* require('select_data_json2.php'); */
+
+    /* require('update_data_blob.php'); */
+    /* require('update_data_text.php'); */
+    /* require('update_data_json.php'); */
 
 ?>

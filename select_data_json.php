@@ -4,8 +4,8 @@
     ini_set('memory_limit', '5000M');
     ini_set('max_execution_time', 240);
 
-    $stmt = $conn->prepare("SELECT JSON_EXTRACT(JSON_Tiny_Data, '$[*].color') 
-                            FROM JSON_Tiny;");
+    $stmt = $conn->prepare("SELECT JSON_EXTRACT(JSON_Normal_Data, '$[*].color') 
+                            FROM JSON_Normal;");
 
     $time_start = microtime(true);
     $stmt->execute();

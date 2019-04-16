@@ -1,8 +1,5 @@
 <?php
 
-ini_set('memory_limit', '5000M');
-ini_set('max_execution_time', 240);
-
 $data = file_get_contents('../data_normal.json');
 $data= json_decode($data);
 

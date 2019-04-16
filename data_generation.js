@@ -9,7 +9,7 @@ function getRandomDate() {
     var toDate = new Date('01-01-2019');
     fromDate = fromDate.getTime();
     toDate = toDate.getTime();
-    var date = new Date(fromDate + Math.random() * (toDate - fromDate))
+    var date = new Date(fromDate + Math.random() * (toDate - fromDate));
     return date;
 }
 
@@ -39,8 +39,8 @@ class Item {
         this.description = getSlicedDescription();
         this.gender = arrays.Genders[getRandomInt(0, (arrays.Genders.length - 1))];
         this.color = arrays.Colors[getRandomInt(0, (arrays.Colors.length - 1))];
-        this.parent_category = arrays.Categorites[getRandomInt(0, (arrays.Categorites.length - 1))];
-        this.child_category = arrays.Categorites[getRandomInt(0, (arrays.Categorites.length - 1))];
+        this.parent_category = arrays.Categories[getRandomInt(0, (arrays.Categories.length - 1))];
+        this.child_category = arrays.Categories[getRandomInt(0, (arrays.Categories.length - 1))];
         this.size = arrays.Sizes[getRandomInt(0, (arrays.Sizes.length - 1))];
         this.created_date = getRandomDate();
         this.modified_date = getRandomDate();

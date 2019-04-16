@@ -4,7 +4,7 @@
     ini_set('memory_limit', '5000M');
     ini_set('max_execution_time', 240);
 
-    $stmt = $conn->prepare("SELECT JSON_Tiny_Data FROM JSON_Tiny");
+    $stmt = $conn->prepare("SELECT JSON_Normal_Data FROM JSON_Normal");
 
     $time_start = microtime(true);
     $stmt->execute();
@@ -20,7 +20,7 @@
     }
 
     $time_end = microtime(true);
-   
+
     $time = $time_end - $time_start;
 
     $file = '../responseTimes.txt';

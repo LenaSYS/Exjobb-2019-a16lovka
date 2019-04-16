@@ -23,7 +23,7 @@ function getRandomInt(min, max) {
 //Class for a tiny Object
 class TinyItem {
     constructor(Id) {
-        this.id = Id + 1;
+        this.id = Id;
         this.price = getRandomInt(50, 1000);
         this.gender = arrays.Genders[getRandomInt(0, (arrays.Genders.length - 1))];
         this.color = arrays.Colors[getRandomInt(0, (arrays.Colors.length - 1))];
